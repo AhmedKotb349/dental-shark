@@ -609,18 +609,52 @@ footer{background:var(--bg2);border-top:1px solid var(--b2);padding:44px 32px 22
 .dash-list { list-style: none; padding: 0; margin: 0; }
 .dash-list li { margin-bottom: 2px; }
 
-/* RESPONSIVE */
+/* =============================================
+   RESPONSIVE — MOBILE-FIRST COMPREHENSIVE FIX
+   ============================================= */
+
+/* Global safe defaults */
+*, *::before, *::after { box-sizing: border-box; }
+img { max-width: 100%; height: auto; }
+body { overflow-x: hidden; }
+
+/* Make sections never overflow */
+.sec, .flash-wrap, .shark-pts-section, .hero-inner,
+.ai-main-grid, .contact-grid, .booking-form,
+.dash-layout, .shop-layout, .eng-page, .ai-page,
+.about-page, .wishlist-page, .contact-page {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Fix flash-wrap & shark-pts-section horizontal overflow on small screens */
+.flash-wrap {
+  margin: 0 32px;
+  width: calc(100% - 64px);
+  box-sizing: border-box;
+}
+.shark-pts-section {
+  margin: 0 32px 32px;
+  width: calc(100% - 64px);
+  box-sizing: border-box;
+}
+
+/* ---- 1024px ---- */
 @media(max-width:1024px){
   .hero-inner,.dash-layout{grid-template-columns:1fr}
   .hero-text h1{font-size:54px}
   .prod-grid,.shop-grid{grid-template-columns:repeat(3,1fr)}
   .sp-cards{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr 1fr;gap:24px}
+  .cat-grid{grid-template-columns:repeat(6,1fr);gap:10px}
 }
+
+/* ---- 900px ---- */
 @media(max-width:900px){
   .nav-links{display:none!important}
   .nav-search-wrap{display:none!important}
   #mob-search-row{display:flex!important}
-  .nav-timer{display:flex!important; font-size:11px; padding:0 6px;}
+  .nav-timer{display:flex!important;font-size:11px;padding:0 6px}
   .hamburger{display:flex}
   .hero-text h1{font-size:42px}
   .hero-slideshow{height:300px}
@@ -633,44 +667,166 @@ footer{background:var(--bg2);border-top:1px solid var(--b2);padding:44px 32px 22
   .ai-caps-grid{grid-template-columns:1fr 1fr;gap:14px}
   .footer-grid{grid-template-columns:1fr 1fr;gap:20px}
   .sp-cards{grid-template-columns:1fr 1fr}
-  .contact-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr;padding:32px 20px}
+
+  /* Tighten side margins so sections don't overflow */
+  .flash-wrap, .shark-pts-section{margin:0 16px;width:calc(100% - 32px);padding:24px}
+  .sec{padding:48px 20px}
 }
+
+/* ---- 768px ---- */
 @media(max-width:768px){
   body.logged-in{padding-bottom:62px}
   .hamburger{display:flex}
-  #main-nav{padding:0 8px; width: 100% !important; box-sizing: border-box; left:0; right:0;}
-  .nav-in{height:56px;gap:2px; width:100%; overflow:hidden;}
-  .nav-logo{flex-shrink:1; min-width:0;}
-  .nav-logo-name{font-size:16px!important; display:block!important;}
-  .nav-right{gap:4px; flex-shrink:0;}
-  #flash-bar{font-size:10px;padding:5px 42px 5px 10px}
+
+  /* Nav — full-width, no overflow */
+  #main-nav{padding:0 8px;width:100%!important;box-sizing:border-box;left:0;right:0}
+  .nav-in{height:56px;gap:2px;width:100%;overflow:visible}
+  .nav-logo{flex-shrink:1;min-width:0}
+  .nav-logo-name{font-size:15px!important;display:block!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .nav-logo-ship{display:none}
+  .free-ship-badge{display:none}
+  .nav-right{gap:3px;flex-shrink:0}
+  .nav-timer{display:none!important}
+
+  /* Flash bar */
+  #flash-bar{font-size:9px;padding:5px 40px 5px 8px;flex-wrap:wrap;gap:4px;text-align:center}
+  .fb-timer{font-size:14px}
+
+  /* Pages top padding */
   .hero{padding-top:56px}
-  .shop-layout,.eng-page,.ai-page,.dash-layout,.about-page,.wishlist-page,.contact-page{padding-top:56px!important}
+  .shop-layout,.eng-page,.ai-page,.dash-layout,.about-page,
+  .wishlist-page,.contact-page{padding-top:56px!important}
   .confirm-page{padding-top:56px!important}
+
+  /* Login screen */
   #login-screen{flex-direction:column!important}
   .login-left{display:none!important}
-  .login-right{width:100%!important;border-left:none!important;padding:28px 22px 80px;min-height:100vh}
+  .login-right{width:100%!important;border-left:none!important;padding:28px 22px 80px;min-height:100vh;box-sizing:border-box}
   .mobile-logo{display:flex!important}
-}
-@media(max-width:600px){
-  .hero-inner{grid-template-columns:1fr}
-  .hero-slideshow{display:none}
-  .prod-grid,.shop-grid{grid-template-columns:1fr;gap:12px}
-  .shop-layout{flex-direction:column}
-  .shop-sidebar{width:100%;height:auto;position:static;border-right:none;border-bottom:1px solid var(--b2)}
+
+  /* Sections */
+  .sec{padding:40px 16px}
+  .sec-title{font-size:30px}
+  .sec-head{flex-direction:column;align-items:flex-start;gap:10px}
+
+  /* Flash wrap & Shark points — flush with page edges */
+  .flash-wrap,.shark-pts-section{margin:0 12px;width:calc(100% - 24px);padding:20px 16px;border-radius:14px}
+  .flash-head{flex-wrap:wrap;gap:8px}
+  .flash-head h2{font-size:26px}
+  .flash-timer{margin-left:0;margin-top:4px}
+
+  /* Hero */
+  .hero-inner{padding:60px 16px 40px;gap:32px}
+  .hero-text h1{font-size:36px}
+  .hero-text p{font-size:14px}
+  .hero-stats{gap:20px;flex-wrap:wrap}
+  .hs-num{font-size:28px}
+  .hero-btns{gap:8px}
+  .btn-primary,.btn-outline{padding:10px 18px;font-size:12px}
+
+  /* Product grids */
+  .prod-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .shop-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+
+  /* Category grid */
   .cat-grid{grid-template-columns:repeat(4,1fr);gap:8px}
-  .team-grid{grid-template-columns:1fr 1fr}
+  .cat-card{padding:12px 6px}
+  .cat-icon{font-size:20px}
+  .cat-name{font-size:10px}
+
+  /* Teams */
+  .team-grid{grid-template-columns:1fr 1fr;gap:12px}
+
+  /* Footer */
+  .footer-grid{grid-template-columns:1fr 1fr;gap:16px}
+
+  /* Shark Points cards */
+  .sp-cards{grid-template-columns:1fr 1fr;gap:10px}
+  .sp-head{flex-wrap:wrap;gap:8px}
+  .sp-head h2{font-size:26px}
+
+  /* Search drop */
+  #search-drop{width:calc(100% - 24px);left:12px;right:12px;transform:none}
+}
+
+/* ---- 600px ---- */
+@media(max-width:600px){
+  /* Hero */
+  .hero-inner{grid-template-columns:1fr;padding:50px 14px 36px}
+  .hero-slideshow{display:none}
+  .hero-text h1{font-size:32px}
+  .hero-stats{gap:16px}
+
+  /* Grids collapse to 1 col */
+  .prod-grid,.shop-grid{grid-template-columns:1fr;gap:12px}
+  .sp-cards{grid-template-columns:1fr;gap:10px}
+  .values-grid{grid-template-columns:1fr;gap:12px}
   .svcs-grid{grid-template-columns:1fr;gap:12px}
-  .ai-caps-grid{grid-template-columns:1fr}
-  .kpi-grid{grid-template-columns:1fr 1fr}
+  .form-row{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr;gap:20px}
   .dash-row{grid-template-columns:1fr}
   .dash-layout{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:1fr 1fr;gap:10px}
+
+  /* Category grid smaller */
+  .cat-grid{grid-template-columns:repeat(3,1fr);gap:7px}
+
+  /* Teams — 1 col on very small */
+  .team-grid{grid-template-columns:1fr 1fr;gap:10px}
+
+  /* Shop layout stacks */
+  .shop-layout{flex-direction:column}
+  .shop-sidebar{width:100%;height:auto;position:static;border-right:none;border-bottom:1px solid var(--b2)}
+
+  /* Dashboard */
   .dash-sidebar{position:static;height:auto}
   .eng-av-float{display:none}
-  .form-row{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr}
-  .values-grid{grid-template-columns:1fr}
-  .sp-cards{grid-template-columns:1fr}
+
+  /* AI caps */
+  .ai-caps-grid{grid-template-columns:1fr;gap:10px}
+
+  /* Sections */
+  .sec{padding:32px 14px}
+  .sec-title{font-size:26px}
+
+  /* Flash & shark pts */
+  .flash-wrap,.shark-pts-section{margin:0 10px;width:calc(100% - 20px);padding:16px 14px;border-radius:12px}
+  .ft-block{min-width:36px;padding:4px 6px}
+  .ft-num{font-size:18px}
+
+  /* Contact grid */
+  .contact-grid{padding:24px 14px}
+  .booking-form{padding:20px 14px}
+
+  /* Product cards on 1 col — use bigger image */
+  .pc-img-wrap{height:180px}
+
+  /* Buttons full-width on tiny */
+  .hero-btns{flex-direction:column;align-items:flex-start}
+  .btn-primary,.btn-outline{width:100%;text-align:center;justify-content:center}
+}
+
+/* ---- 400px — extra small phones ---- */
+@media(max-width:300px){
+  .cat-grid{grid-template-columns:repeat(3,1fr);gap:6px}
+  .cat-card{padding:10px 4px;border-radius:10px}
+  .cat-icon{font-size:18px;margin-bottom:5px}
+  .cat-name{font-size:9px}
+
+  .team-grid{grid-template-columns:1fr;gap:10px}
+
+  .kpi-grid{grid-template-columns:1fr;gap:8px}
+
+  .nav-logo-name{font-size:13px!important}
+
+  .hero-text h1{font-size:28px}
+
+  .pc-img-wrap{height:160px}
+
+  .flash-wrap,.shark-pts-section{margin:0 8px;width:calc(100% - 16px)}
+
+  .sec{padding:28px 12px}
 }
 </style>
 </head>
